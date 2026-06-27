@@ -3,7 +3,7 @@ from datetime import datetime
 from dataclasses import asdict
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from search import load_data, search_itineraries
+from src.search import load_data, search_itineraries
 
 # ── app setup ──────────────────────────────────────────────
 app = FastAPI(title="SkyPath Flight Search")

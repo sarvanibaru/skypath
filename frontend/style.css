@@ -1,0 +1,333 @@
+/* ── reset & base ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e8f4f8 0%, #e8f8f0 100%);
+  color: #2d3748;
+  min-height: 100vh;
+}
+
+/* ── header ── */
+header {
+  background: linear-gradient(135deg, #38b2ac 0%, #4299e1 100%);
+  color: white;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(56,178,172,0.3);
+}
+header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* ── main layout ── */
+main { max-width: 780px; margin: 32px auto; padding: 0 16px; }
+
+/* ── search box ── */
+.search-box {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 28px;
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  min-width: 120px;
+}
+
+label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #718096;
+  letter-spacing: 0.08em;
+}
+
+input {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+  background: #f7fafc;
+  color: #2d3748;
+}
+input:focus {
+  border-color: #38b2ac;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(56,178,172,0.15);
+}
+input[type="text"] { text-transform: uppercase; }
+
+button#search-btn {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #38b2ac, #4299e1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(56,178,172,0.4);
+}
+button#search-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(56,178,172,0.5);
+}
+button#search-btn:disabled {
+  background: #a0aec0;
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+/* ── errors ── */
+.form-error {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: #fff5f5;
+  border: 1.5px solid #fc8181;
+  border-radius: 12px;
+  color: #c53030;
+  font-size: 14px;
+}
+
+.api-error {
+  padding: 16px;
+  background: #fff5f5;
+  border: 1.5px solid #fc8181;
+  border-radius: 14px;
+  color: #c53030;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* ── loading ── */
+#loading {
+  text-align: center;
+  padding: 48px 32px;
+  color: #718096;
+}
+
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #38b2ac;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── results header ── */
+#results-header {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 600;
+  padding-left: 4px;
+}
+
+/* ── empty state ── */
+.empty-state {
+  text-align: center;
+  padding: 64px 32px;
+  color: #718096;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state p:first-of-type { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #4a5568; }
+
+/* ── itinerary card ── */
+.itinerary-card {
+  background: white;
+  border-radius: 20px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1.5px solid #e8f4f8;
+  transition: all 0.2s;
+}
+.itinerary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border-color: #38b2ac;
+}
+
+/* card header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.stops-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.stops-badge.direct {
+  background: #f0fff4;
+  color: #276749;
+}
+.stops-badge.two-stop {
+  background: #fffaf0;
+  color: #c05621;
+}
+
+.card-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: #2d3748;
+}
+
+/* ── timeline layout ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+/* vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, #38b2ac, #4299e1);
+  border-radius: 2px;
+}
+
+.timeline-segment {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+/* dot on timeline */
+.timeline-dot {
+  position: absolute;
+  left: -17px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #38b2ac;
+  z-index: 1;
+}
+
+.seg-times {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 110px;
+}
+
+.seg-time-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.seg-time {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2d3748;
+  line-height: 1;
+}
+
+.seg-code {
+  font-size: 13px;
+  font-weight: 600;
+  color: #718096;
+}
+
+.seg-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+
+.seg-flight-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5568;
+}
+
+.seg-airline {
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+/* layover row */
+.layover-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 8px 0;
+  font-size: 12px;
+  color: #d69e2e;
+  font-weight: 600;
+  background: #fffff0;
+  border-radius: 8px;
+  margin: 4px 0;
+  padding: 6px 12px;
+}
+
+/* card footer */
+.card-footer {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1.5px dashed #e2e8f0;
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #718096;
+  font-weight: 500;
+}
+
+.card-footer span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── utility ── */
+.hidden { display: none !important; }

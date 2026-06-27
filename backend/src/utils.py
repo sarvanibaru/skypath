@@ -1,8 +1,8 @@
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from functools import lru_cache
-from models import Flight, Airport
-from config import TIMEZONE_CACHE_SIZE
+from src.models import Flight, Airport
+from src.config import TIMEZONE_CACHE_SIZE 
 
 @lru_cache(maxsize=TIMEZONE_CACHE_SIZE)
 def _get_timezone(tz_name: str) -> ZoneInfo:

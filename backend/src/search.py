@@ -1,9 +1,9 @@
 import json
 from datetime import datetime
 from decimal import Decimal
-from models import Airport, Flight, Segment, Layover, Itinerary
-from utils import layover_minutes, total_duration_minutes
-from config import (
+from src.models import Airport, Flight, Segment, Layover, Itinerary
+from src.utils import layover_minutes, total_duration_minutes
+from src.config import (
     MIN_LAYOVER_DOMESTIC,
     MIN_LAYOVER_INTERNATIONAL,
     MAX_LAYOVER,
