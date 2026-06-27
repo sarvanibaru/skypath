@@ -1,40 +1,39 @@
-from dataclasses import dataclass, field
-from typing import List
+from dataclasses import dataclass
 
 @dataclass
 class FlightBase:
-    flightNumber: str
-    airline: str
-    origin: str
-    destination: str
-    departureTime: str  # local time string e.g. "2024-03-15T08:30:00"
-    arrivalTime: str    # local time string
-    price: float
+    flightNumber : str
+    airline      : str
+    origin       : str
+    destination  : str
+    departureTime: str
+    arrivalTime  : str
+    price        : float
 
 @dataclass
 class Flight(FlightBase):
-    aircraft: str       # internal field, not exposed to frontend
+    aircraft: str
 
 @dataclass
 class Segment(FlightBase):
-    pass                # inherits all FlightBase fields, acts as DTO
+    pass
 
 @dataclass
 class Airport:
-    code: str
-    name: str
-    city: str
-    country: str
+    code    : str
+    name    : str
+    city    : str
+    country : str
     timezone: str
 
 @dataclass
 class Layover:
-    airport: str
+    airport        : str
     durationMinutes: int
 
 @dataclass
 class Itinerary:
-    segments: List[Segment]
-    layovers: List[Layover]
+    segments            : list[Segment]
+    layovers            : list[Layover]
     totalDurationMinutes: int
-    totalPrice: float
+    totalPrice          : float
