@@ -20,6 +20,7 @@ def load_data(filepath: str = DATA_PATH) -> tuple[dict[str, Airport], dict[tuple
 
     flights_by_origin_date: dict[tuple, list[Flight]] = {}
     for f in raw["flights"]:
+        f["price"] = float(f["price"]) 
         flight = Flight(**f)
         date   = datetime.fromisoformat(flight.departureTime).date().isoformat()
         key    = (flight.origin, date)
@@ -99,11 +100,11 @@ def search_itineraries(
     except ValueError:
         raise ValueError(f"Invalid date format: {date}. Expected YYYY-MM-DD")
 
-    results       = []
-    origin_flights = get_flights(origin)  # fetch once
-
     def get_flights(airport: str) -> list[Flight]:
         return flights_by_origin_date.get((airport, date), [])
+    
+    results       = []
+    origin_flights = get_flights(origin)  # fetch once
 
     # direct
     for f1 in origin_flights:

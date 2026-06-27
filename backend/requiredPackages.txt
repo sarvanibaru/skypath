@@ -1,0 +1,5 @@
+fastapi==0.110.0
+uvicorn==0.27.0
+
+# pip3 install fastapi uvicorn
+# pip3 show fastapi
